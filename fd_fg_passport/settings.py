@@ -58,6 +58,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://89.169.2.238',    
     'http://24miv-test-passport.ru',
     'http://www.24miv-test-passport.ru',
+    'https://89.169.2.238', 
     'https://24miv-test-passport.ru',
     'https://www.24miv-test-passport.ru'
 ]
