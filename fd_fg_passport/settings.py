@@ -44,7 +44,7 @@ DEBUG = os.getenv("DEBUG", "False") == "TRUE"
 ALLOWED_HOSTS = [
     'localhost',
     "127.0.0.1",
-    "5.129.243.11"    
+    "89.169.2.238"    
     '24miv-test-passport.ru',
     'www.24miv-test-passport.ru'
     
@@ -55,7 +55,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
-    'http://5.129.243.11',    
+    'http://89.169.2.238',    
     'http://24miv-test-passport.ru',
     'http://www.24miv-test-passport.ru',
     'https://24miv-test-passport.ru',
