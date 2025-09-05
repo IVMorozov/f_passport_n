@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="region_info d-flex flex-row mb-3 justify-content-center">
+        
+        <div class="p-2">
+            <img src="{% static 'images/Gerb VO.png' %}" alt="Волгоградская область" class="reg_gerb">
+        </div>
+        <div class="p-6">
+            <p class="region">Волгоградская область</p>            
+        </div>       
+	</div>
+
+	<div class="map container-fluid">
+		<svg viewBox="0 0 612 573">
+			{% for MO_2 in MO.all %}
+				{% if   MO_2.href  == 'mo_city' %}
+                    {% comment %} <a href="{% url 'mo_city' mo.id %}">   {% endcomment %}
+					<a href="{% url 'mo_city' MO_2.id %}"> 
+                {% elif  MO_2.href  == 'mo' %}
+                    {% comment %} <a href="{% url 'mo' %}">       {% endcomment %}
+					<a href="{% url 'mo' MO_2.id %}">                    
+                {% else %}
+                    <a href="{{ MO_2.href }} ">
+                {% endif %}
+				
+				
+				<path class="{{ MO_2.path_class }}" 
+				d="{{ MO_2.path_d }}" 
+				fill="{{ MO_2.path_fill }}" 
+				description-data="{{ MO_2.path_description_data }}" 
+				description-data-img="{{ MO_2.path_description_data_img}}">
+				</a>	
+			{% endfor %}
+		</svg>
+		
+		<div class="description"></div>
+		<div class="description2"></div>
+		<img src="{% static 'images/VLG_Obl_2.png' %}" alt="" >
+        
+	</div>
+	<div class="menu container-fluid">
+		<span>---- СЛОИ ----</span>
+		<button class="menu_button p-2 but_1">Без слоя</button>
+		<button class="menu_button p-2 but_2">Коэффициент ФД</button>
+		<button class="menu_button p-2 but_3">Охват ФГ</button>
+		<button class="menu_button p-2 but_4">Население</button>
+		<button class="menu_button p-2 but_5">Отчет по региону</button>
+		
+	</div>
+
+	{% comment %} {{ js }} {% endcomment %}
+
+	<div class="footer_">
+		<img class="f1" src="{% static 'images/шкала2.jpg' %}" alt="">
+		<img class="f2" src="{% static 'images/шкала2_digit.jpg' %}" alt="">		
+	</div>
+	<div class="footer__">
+		<img class="f1" src="{% static 'images/шкала3.jpg' %}" alt="">
+		<img class="f2" src="{% static 'images/шкала3_digit.jpg' %}" alt="">		
+	</div>
+	
+
+<script>
+    var KFD_data_mass_prepare = {{ js|safe }};
+</script>
+{% endblock content %}

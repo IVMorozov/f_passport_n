@@ -1,0 +1,24 @@
+[project]
+name = "f-passport"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Ilya Morozov",email = "morozov1308@yandex.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django (>=5.2.5,<6.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "pillow (>=11.3.0,<12.0.0)",
+    "signals (>=0.0.2,<0.0.3)"
+]
+
+[tool.poetry]
+packages = [{include = "f_passport", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <span class="fs-3" > <b>Список обращений </b> </span>        
+    </div><br> 
+
+    <div class="row row-cols-1 row-cols-md-1 g-4 px-auto"  >        
+        {% for review  in reviews.all %}        
+            <div class="col p-2">                
+                <div class="card" >        
+                    <div class="container-fluid text-end"><b>Оценка </b>
+                        {% if  review.rating == 1 %}
+                            <span class="text-start badge bg-danger">{{ review.rating }} </span>  
+                        {% elif review.rating == 2 %}
+                            <span class="text-start badge bg-danger">{{ review.rating }} </span>
+                        {% elif review.rating == 3 %}
+                            <span class="text-start badge bg-warning text-dark">{{ review.rating }} </span>  
+                        {% elif review.rating == 4 %}
+                            <span class="text-start badge bg-success">{{ review.rating }} </span>
+                        {% elif review.rating == 5 %}
+                            <span class="text-start badge bg-success">{{ review.rating }} </span>
+                        {% endif %} 
+                        
+                        <span class="mx-2 text-end"><b>Дата создания: </b>  <span class="badge bg-info px-2"> {{ review.created }}</span></span>
+                        <span class="mx-2 text-end"><b>Автор: </b>  <span class="badge bg-success px-2"> {{ review.author }}</span></span>
+                    </div> 
+                    <span class=" px-2"><b>Муниципальное образование:</b> {{ review.MO }}  </span>
+                    <span class=" px-2"><b>Вид сервиса:</b> {{ review.service }} </span>
+
+                    <span class="mx-auto"><b>Текст обращения</b></span>                     
+                    <div class="card mx-2 p-2 bg-secondary-subtle overflow-auto" style="height:100px">{{ review.text }} </div>
+
+                    {% for review_answer  in review_answers.all %} 
+                        {% if review_answer.Review.id == review.id %}
+                            
+                        
+                            <div class="my-2">
+                                <div class="d-flex justify-content-end">
+                                    <span class="mx-2 "><b>Дата ответа: </b>  <span class="badge bg-info px-2"> {{ review_answer.answer_created }}</span></span>
+                                    <span class="mx-2 "><b>Автор : </b>  <span class="badge bg-success px-2"> {{ review_answer.answer_author }}</span></span>
+                                    {% comment %} <span class=" mx-2 p-2 overflow-auto " style="height:100px; background-color:  #ebead5ff"><b>Автор : </b>  <span class="badge bg-success px-2"> {{ review_answer.answer_text }}</span></span> {% endcomment %}
+                                    <div class="card mx-2 p-2 overflow-auto" style="width:80vh; background-color:  #ebead5ff">{{ review_answer.answer_text }} </div>
+                                </div>
+                            </div> 
+                            
+
+                        {% endif %}
+                    {% endfor %}
+                    <div class="text-end px-2">
+                        {% if request.user.is_superuser %}
+                            <a href="{% url "answer_create" review.id %}" class="btn menu_button_rev my-2">Ответить</a>                      
+                        {% endif %}
+                        
+                    </div> 
+                    
+                </div>    
+
+                
+            </div>
+        
+        {% endfor %}
+    </div>
+
+
+    
+{% endblock content %}

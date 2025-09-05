@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="region_info d-flex flex-row mb-3 justify-content-center">
+        
+        <div class="p-2">
+            <img src="{% static 'images/Gerb VO.png' %}" alt="Волгоградская область" class="reg_gerb">
+        </div>
+        <div class="p-6">
+            <p class="region">Волгоградская область</p>            
+        </div>       
+	</div>
+	
+	<div class="d-flex flex-row mb-3 justify-content-center">		
+			<ul >
+				
+				{% if region_avg_F  >= 80 %}                        
+                        <li><h5>Средний коэффициент ФД (%): <span class="badge bg-success">{{region_avg_F |floatformat:2 }}</span></h5></li>
+                        {% elif region_avg_F >= 60 %}               
+                            <li><h5>Средний коэффициент ФД (%): <span class="badge bg-warning">{{region_avg_F |floatformat:2 }}</span></h5></li>
+						{% elif region_avg_F >= 40 %}               
+                            <li><h5>Средний коэффициент ФД (%): <span class="badge bg-warning">{{region_avg_F |floatformat:2 }}</span></h5></li>
+						{% elif region_avg_F >= 20 %}               
+                            <li><h5>Средний коэффициент ФД (%): <span class="badge bg-danger">{{region_avg_F |floatformat:2 }}</span></h5></li>
+						{% elif region_avg_F >= 0 %}               
+                            <li><h5>Средний коэффициент ФД (%): <span class="badge bg-danger">{{region_avg_F |floatformat:2 }}</span></h5></li>
+                    {% endif %}
+				{% if region_avg_FG  >= 60 %}                        
+                        <li><h5>Средний охват ФГ (%): <span class="badge bg-success">{{region_avg_FG |floatformat:2 }}</span></h5></li>
+                        {% elif region_avg_FG >= 40 %}               
+                            <li><h5>Средний охват ФГ (%): <span class="badge bg-warning">{{region_avg_FG |floatformat:2 }}</span></h5></li>
+						{% elif region_avg_FG >= 20 %}               
+                            <li><h5>Средний охват ФГ (%): <span class="badge bg-danger">{{region_avg_FG|floatformat:2 }}</span></h5></li>
+						{% elif region_avg_FG >= 0 %}               
+                            <li><h5>Средний охват ФГ (%): <span class="badge bg-secondary">{{region_avg_FG |floatformat:2 }}</span></h5></li>
+                    {% endif %}	
+				<li><h5>Численность населения (тыс. чел.):  {{region_sum_CHN  |floatformat:0  }}</h5></li>
+			</ul>		
+	</div>
+
+	<div class=" d-flex flex-row mb-3 justify-content-center">
+		<table>
+			<thead>
+				<tr>
+					<th class="table_name">Муниципальное образование </th>
+					<th></th>
+					<th class="table_data">Средний коэффициент ФД (%):</th>
+					<th></th>
+					<th class="table_data">Средний охват ФГ (%):</th>
+					<th></th>
+					<th class="table_data">Население (тыс. чел.):</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in region %}
+				<tr>
+					<td >{{ item.MO2 }}</td>
+					<td></td>
+					<td class="table_data" style="background-color: {% if item.avg_F >= 80 %} #087c2bff {% elif item.avg_F >= 60 %} #ffcc00 {% elif item.avg_F >= 40 %} #ff9900 {% elif item.avg_F >= 20 %} #ff3300 {% else %} #ff0000 {% endif %};">
+					{{ item.avg_F |floatformat:2 }}
+					</td>
+					<td></td>
+					<td class="table_data" style="background-color: {% if item.avg_FG >= 60 %} #087c2bff {% elif item.avg_FG >= 40 %} #ffcc00  {% elif item.avg_FG >= 20 %} #ff3300 {% else %} #ff0000 {% endif %};">
+					{{ item.avg_FG |floatformat:2 }}
+					</td>
+					<td></td>
+					<td class="table_data" style="background-color: #98d3e2ff">{{ item.avg_CHN }}</td>
+				</tr>
+				<tr class = "table-row">
+					<td></td>
+				</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>		
+	</div>
+
+
+
+
+	
+
+
+	
+
+
+{% endblock content %}
