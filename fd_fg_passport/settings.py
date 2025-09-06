@@ -44,7 +44,8 @@ DEBUG = os.getenv("DEBUG", "False") == "TRUE"
 ALLOWED_HOSTS = [
     'localhost',
     "127.0.0.1",
-    "89.169.2.238"    
+    "89.169.2.238",
+    'http://89.169.2.238'    
     '24miv-test-passport.ru',
     'www.24miv-test-passport.ru'
     

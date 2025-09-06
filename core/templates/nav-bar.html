@@ -19,7 +19,7 @@
                     {% endif %}                                  
 
                     {% if request.user.is_superuser %}
-                        <a class="nav-link" href="http://127.0.0.1:8000/admin/">Управление</a> 
+                        {% comment %} <a class="nav-link" href="http://89.169.2.238/admin/">Управление</a>  {% endcomment %}
                         <a class="nav-link" href="{% url 'import' %}">Импорт</a>
                     {% endif %}
                     {% comment %} <a class="nav-link disabled">Отключенная</a> {% endcomment %}
